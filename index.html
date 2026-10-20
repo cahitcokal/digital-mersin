@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dijital Mersin | Akdeniz'in Tarih, Kültür ve Tatil Portalı</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f4c81;
+      --primary-dark: #092c4c;
+      --accent: #f58220;
+      --dark: #0f172a;
+      --text: #334155;
+      --text-muted: #64748b;
+      --light-bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Üst Menü */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 0.35rem;
+      align-items: center;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .nav-link {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.45rem 0.75rem;
+      border-radius: 8px;
+      transition: var(--transition);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary);
+      background: #eff6ff;
+    }
+
+    /* Dil Seçici */
+    .lang-switcher {
+      display: flex;
+      gap: 0.2rem;
+      background: #e2e8f0;
+      padding: 0.25rem;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+    .lang-btn {
+      border: none;
+      background: transparent;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 999px;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+    .lang-btn.active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+
+    /* Hero & Arama */
+    .hero {
+      padding: 4.5rem 1.5rem 3.5rem;
+      text-align: center;
+      background: linear-gradient(180deg, #e0f2fe 0%, var(--light-bg) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-content {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .hero-tag {
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 {
+      font-size: 2.85rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .hero p {
+      font-size: 1.12rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* Arama ve Dropdown */
+    .search-wrapper {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .search-input-box {
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-radius: 16px;
+      padding: 0.65rem 1.25rem;
+      box-shadow: 0 12px 30px rgba(15, 76, 129, 0.08);
+      transition: var(--transition);
+    }
+    .search-input-box:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 16px 36px rgba(15, 76, 129, 0.16);
+    }
+    .search-icon {
+      color: #94a3b8;
+      width: 22px;
+      height: 22px;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+    }
+    .search-input {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-size: 1.05rem;
+      font-family: inherit;
+      color: var(--dark);
+    }
+    .search-input::placeholder { color: #94a3b8; }
+    .clear-search {
+      border: none;
+      background: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 1.3rem;
+      display: none;
+    }
+    .clear-search.show { display: block; }
+
+    /* Açılır Arama Listesi */
+    .search-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      z-index: 500;
+      max-height: 440px;
+      overflow-y: auto;
+      display: none;
+      text-align: left;
+    }
+    .search-dropdown.open { display: block; }
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid #f1f5f9;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      color: inherit;
+    }
+    .dropdown-item:last-child { border-bottom: none; }
+    .dropdown-item:hover {
+      background-color: #f8fafc;
+      transform: translateX(4px);
+    }
+    .dropdown-thumb {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .dropdown-info { flex-grow: 1; }
+    .dropdown-category {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .dropdown-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .dropdown-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .dropdown-no-result {
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Kategori Butonları */
+    .quick-filters {
+      display: flex;
+      justify-content: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
+    }
+    .filter-chip {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .filter-chip:hover, .filter-chip.active {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    /* Ana Liste Görünümü */
+    .main-section {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .result-count {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 1.85rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(15, 76, 129, 0.1);
+      border-color: #cbd5e1;
+    }
+    .card-img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      background: #cbd5e1;
+    }
+    .card-body {
+      padding: 1.4rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.65rem;
+    }
+    .card-category {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .card-location {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+      color: var(--dark);
+      line-height: 1.3;
+    }
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      flex-grow: 1;
+    }
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.85rem;
+      border-top: 1px solid #f1f5f9;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .tag {
+      font-size: 0.72rem;
+      background: #f1f5f9;
+      color: #475569;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .read-more {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      white-space: nowrap;
+    }
+
+    /* Detay Sayfası Görünümü */
+    #detail-view {
+      display: none;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+    .detail-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 0.6rem 1.25rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      cursor: pointer;
+      margin-bottom: 2rem;
+      transition: var(--transition);
+    }
+    .detail-back-btn:hover {
+      background: #eff6ff;
+      border-color: var(--primary);
+    }
+    .detail-header { margin-bottom: 2rem; }
+    .detail-category-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .detail-title {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .detail-location {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .detail-hero-img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2.5rem;
+    }
+    .detail-content {
+      background: #ffffff;
+      padding: 2.5rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .detail-section-block {
+      margin-bottom: 2.5rem;
+    }
+    .detail-section-block:last-child { margin-bottom: 0; }
+    .detail-section-block h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .detail-section-block p {
+      font-size: 1.05rem;
+      color: #475569;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .detail-tags-bar {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      background: #ffffff;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2.15rem; }
+      .detail-title { font-size: 2rem; }
+      .detail-hero-img { height: 280px; }
+      .detail-content { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Üst Menü -->
+  <header>
+    <div class="nav-container">
+      <div class="logo" onclick="navigateToHome();">Dijital<span>Mersin</span></div>
+      <ul class="nav-links">
+        <li><a class="nav-link active" data-cat="all" onclick="filterByCategory('all')"><span data-i18n="nav.all">Tümü</span></a></li>
+        <li><a class="nav-link" data-cat="faith" onclick="filterByCategory('faith')"><span data-i18n="nav.faith">Camiler & Kiliseler</span></a></li>
+        <li><a class="nav-link" data-cat="beaches" onclick="filterByCategory('beaches')"><span data-i18n="nav.beaches">Plajlar & Tatil</span></a></li>
+        <li><a class="nav-link" data-cat="history" onclick="filterByCategory('history')"><span data-i18n="nav.history">Tarih & Kaleler</span></a></li>
+        <li><a class="nav-link" data-cat="nature" onclick="filterByCategory('nature')"><span data-i18n="nav.nature">Doğal Güzellikler</span></a></li>
+        <li><a class="nav-link" data-cat="education" onclick="filterByCategory('education')"><span data-i18n="nav.education">Üniversiteler</span></a></li>
+        <li><a class="nav-link" data-cat="gastronomy" onclick="filterByCategory('gastronomy')"><span data-i18n="nav.gastronomy">Gastronomi</span></a></li>
+      </ul>
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLanguage('tr')">TR</button>
+        <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ANA SAYFA GÖRÜNÜMÜ -->
+  <div id="home-view">
+    <!-- Hero & Arama -->
+    <section class="hero">
+      <div class="hero-content">
+        <span class="hero-tag" data-i18n="hero.tag">Kilikya'nın İncisi</span>
+        <h1 data-i18n="hero.title">Tarih, Doğa ve Akdeniz'in Buluştuğu Şehir</h1>
+        <p data-i18n="hero.subtitle">Mersin'in binlerce yıllık kültürel mirasını, antik kalelerini, plajlarını, cami ve kiliselerini dijital ortamda keşfedin.</p>
+        
+        <div class="search-wrapper">
+          <div class="search-input-box">
+            <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <input type="text" id="search-input" class="search-input" autocomplete="off" placeholder="Mersin'de arayın... (Örn: Muğdat, Tisan, Tantuni, St. Paul)" oninput="handleSearchInput(event)">
+            <button id="clear-btn" class="clear-search" onclick="clearSearch()">&times;</button>
+          </div>
+
+          <!-- Canlı Arama Açılır Listesi (Dropdown) -->
+          <div id="search-dropdown" class="search-dropdown"></div>
+
+          <!-- Kategori Hap Butonları -->
+          <div class="quick-filters">
+            <button class="filter-chip active" data-cat="all" onclick="filterByCategory('all')" data-i18n="nav.all">Tümü</button>
+            <button class="filter-chip" data-cat="faith" onclick="filterByCategory('faith')" data-i18n="nav.faith">Camiler & Kiliseler</button>
+            <button class="filter-chip" data-cat="beaches" onclick="filterByCategory('beaches')" data-i18n="nav.beaches">Plajlar & Tatil</button>
+            <button class="filter-chip" data-cat="history" onclick="filterByCategory('history')" data-i18n="nav.history">Tarih & Kaleler</button>
+            <button class="filter-chip" data-cat="nature" onclick="filterByCategory('nature')" data-i18n="nav.nature">Doğal Güzellikler</button>
+            <button class="filter-chip" data-cat="education" onclick="filterByCategory('education')" data-i18n="nav.education">Üniversiteler</button>
+            <button class="filter-chip" data-cat="gastronomy" onclick="filterByCategory('gastronomy')" data-i18n="nav.gastronomy">Gastronomi</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kart Listesi -->
+    <main class="main-section">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="sections.title">Mersin Rehberi & Keşif Noktaları</h2>
+        <span class="result-count" id="result-count"></span>
+      </div>
+      <div class="grid" id="cards-container"></div>
+    </main>
+  </div>
+
+  <!-- DETAY SAYFASI GÖRÜNÜMÜ -->
+  <main id="detail-view">
+    <button class="detail-back-btn" onclick="navigateToHome()">
+      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      <span data-i18n="detail.backBtn">Geri Dön</span>
+    </button>
+    <div id="detail-article-container"></div>
+  </main>
+
+  <footer>
+    <p data-i18n="footer.text">&copy; 2026 Dijital Mersin Portalı. Tüm hakları saklıdır.</p>
+  </footer>
+
+  <script>
+    // GENİŞLETİLMİŞ VE ÇOK DİLLİ VERİ TABANI
+    const dataStore = {
+      tr: {
+        metaTitle: "Dijital Mersin | Akdeniz'in Tarih, Kültür ve Tatil Portalı",
+        searchPlaceholder: "Mersin'de arayın... (Örn: Muğdat, Tisan, Kerebiç, Kızkalesi)",
+        resultsText: "Sonuç bulundu: ",
+        noResultsTitle: "Sonuç bulunamadı",
+        noResultsDesc: "Arama teriminizi veya seçtiğiniz kategoriyi değiştirerek tekrar deneyebilirsiniz.",
+        detail: {
+          backBtn: "Listeye Dön",
+          historyTitle: "Tarihçe ve Kuruluş",
+          significanceTitle: "Kültürel & Mimari / Doğal Önemi",
+          visitorTitle: "Ziyaret & Pratik Bilgiler",
+          readMore: "İncele & Detaylar"
+        },
+        nav: {
+          all: "Tümü",
+          faith: "Camiler & Kiliseler",
+          beaches: "Plajlar & Tatil",
+          history: "Tarih & Kaleler",
+          nature: "Doğal Güzellikler",
+          education: "Üniversiteler",
+          gastronomy: "Gastronomi"
+        },
+        hero: {
+          tag: "Kilikya'nın İncisi",
+          title: "Tarih, Doğa ve Akdeniz'in Buluştuğu Şehir",
+          subtitle: "Mersin'in binlerce yıllık kültürel mirasını, antik kalelerini, koylarını, cami ve kiliselerini dijital ortamda keşfedin."
+        },
+        sections: { title: "Mersin Rehberi & Keşif Noktaları" },
+        footer: { text: "© 2026 Dijital Mersin Portalı. Tüm hakları saklıdır." },
+        items: [
+          // CAMİLER & KİLİSELER (İnanç)
+          {
+            id: "mugdat-camii",
+            categoryKey: "faith",
+            category: "Camiler & Kiliseler",
+            location: "Yenişehir, Mersin",
+            title: "Hz. Mikdat (Muğdat) Camii",
+            shortDesc: "Türkiye'nin 6 minareli ender camilerinden biri olan, klasik Osmanlı mimarisini yansıtan anıtsal ibadethane.",
+            tags: ["Yenişehir", "Cami", "Osmanlı Mimarisi", "6 Minare"],
+            image: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80",
+            history: "İslam peygamberi Hz. Muhammed'in sadık sahabesi Mikdat bin Esved anısına 1988-1998 yılları arasında inşa edilmiştir. Türkiye'de Sultanahmet Camii'nden sonra inşa edilen ilk 6 minareli camidir.",
+            significance: "Klasik Osmanlı mimari tarzında inşa edilen cami, 5.500 kişilik kapalı alan kapasitesine sahiptir. Bünyesinde kütüphane, konferans salonu, aşevi ve sağlık ocağı barındıran modern bir külliye niteliğindedir.",
+            visitorInfo: "Mersin sahil şeridinde yer alır, toplu taşıma ile kolayca ulaşılabilir. Günün her vakti ziyarete ve ibadete açıktır."
+          },
+          {
+            id: "tarsus-ulu-camii",
+            categoryKey: "faith",
+            category: "Camiler & Kiliseler",
+            location: "Tarsus, Mersin",
+            title: "Tarsus Ulu Camii (Cami-i Kebir)",
+            shortDesc: "Ramazanoğulları Beyliği döneminden kalan, Şit ve Lokman Hekim türbelerine ev sahipliği yapan kadim ibadethane.",
+            tags: ["Tarsus", "Selçuklu", "Ramazanoğlu", "Türbe"],
+            image: "https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1200&q=80",
+            history: "1579 yılında Ramazanoğlu İbrahim Bey'in oğlu Piri Mehmet Paşa tarafından yaptırılmıştır. Eski bir kilisenin kalıntıları üzerine Selçuklu-Memlük mimarisi etkileriyle inşa edilmiştir.",
+            significance: "İçinde Hz. Şit Peygamber ve hekimlerin piri kabul edilen Lokman Hekim'in türbeleri yer alır. Siyah-beyaz mermer işçilikli portali ve revaklı avlusuyla Türk-İslam taş işçiliğinin şaheserlerindendir.",
+            visitorInfo: "Tarsus Tarihi Kent Dokusu merkezindedir. Yanında tarihi Kırkkaşık Bedesteni bulunur."
+          },
+          {
+            id: "latin-katolik-kilisesi",
+            categoryKey: "faith",
+            category: "Camiler & Kiliseler",
+            location: "Akdeniz, Mersin",
+            title: "Mersin Latin İtalyan Katolik Kilisesi",
+            shortDesc: "19. yüzyıldan bu yana Mersin'in çok kültürlü Akdeniz kimliğini simgeleyen tarihi katedral.",
+            tags: ["Akdeniz", "Katolik Kilisesi", "Katedral", "Levanten Mirası"],
+            image: "https://images.unsplash.com/photo-1548625361-19597793c7d6?auto=format&fit=crop&w=1200&q=80",
+            history: "Sultan Abdülmecid'in fermanıyla 1853 yılında Kapuçin rahipleri tarafından yapımına başlanmış, 1898 yılında kuleleriyle birlikte tamamlanmıştır.",
+            significance: "Mersin'in Levanten ve Hristiyan topluluğunun dini ve kültürel merkezidir. Saat kulesi, vitray pencereleri ve neoklasik taş işçiliği kentin kozmopolit tarihinin yaşayan tanığıdır.",
+            visitorInfo: "Mersin Çamlıbel semtinde, Atatürk Parkı'na yürüme mesafesindedir. Düzenli ayinler devam etmekte olup saygılı ziyaretçilere açıktır."
+          },
+          {
+            id: "aya-tekla",
+            categoryKey: "faith",
+            category: "Camiler & Kiliseler",
+            location: "Silifke, Mersin",
+            title: "Aya Tekla (Azize Thekla Yeraltı Kilisesi)",
+            shortDesc: "Hristiyanlığın ilk kadın şehidi ve havarisi kabul edilen Azize Thekla'nın saklandığı kutsal mağara-kilise.",
+            tags: ["Silifke", "Erken Hristiyanlık", "Azize Thekla", "Hac Merkezi"],
+            image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
+            history: "St. Paul'ün vaazlarından etkilenerek Hristiyanlığı seçen Azize Thekla, putperestlerin baskısından kaçarak Silifke yakınlarındaki bu mağaraya sığınmış ve ömrünü burada insanları iyileştirip dini yayarak geçirmiştir.",
+            significance: "Hristiyanlığın Roma İmparatorluğu'nda serbest bırakılmasından sonra mağara kiliseye çevrilmiş ve MS 4. yüzyılda Hristiyan dünyasının en eski ve en önemli hac merkezlerinden biri olmuştur.",
+            visitorInfo: "Silifke ilçe merkezine 4 km mesafededir. Ziyaretçiler mağaranın içine merdivenlerle inebilir; üstte İmparator Zenon bazilikasının kalıntıları görülebilir."
+          },
+          {
+            id: "ashab-i-kehf",
+            categoryKey: "faith",
+            category: "Camiler & Kiliseler",
+            location: "Tarsus, Mersin",
+            title: "Ashâb-ı Kehf Mağarası ve Camii",
+            shortDesc: "Kur'an-ı Kerim'de Kehf Suresi'nde zikredilen, 309 yıl uyuyan 'Yedi Uyurlar'ın kutsal mağarası.",
+            tags: ["Tarsus", "Yedi Uyurlar", "Kehf Suresi", "İnanç Turizmi"],
+            image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1200&q=80",
+            history: "Roma döneminde putperest hükümdar Dakyanus'un zulmünden kaçarak tek tanrıya inanan yedi genç ve köpekleri Kıtmir'in sığındığı ve yüzlerce yıl uykuya daldığına inanılan mağaradır. 1873 yılında Sultan Abdülaziz tarafından üzerine üç şerefeli cami yaptırılmıştır.",
+            significance: "Hem İslam hem de Hristiyan dünyasında derin teolojik öneme sahip ortak bir inanç merkezidir. Mağaraya inilen basamaklar ve mistik atmosfer ziyaretçileri derinden etkiler.",
+            visitorInfo: "Tarsus'un Dedeler Köyü sırtlarında yer alır. Tarsus merkezinden minibüslerle veya özel araçla ulaşım çok kolaydır."
+          },
+
+          // PLAJLAR & TATİL ROTALARI
+          {
+            id: "tisan-koyu",
+            categoryKey: "beaches",
+            category: "Plajlar & Tatil",
+            location: "Silifke, Mersin",
+            title: "Tisan Yarımadası & Koyu",
+            shortDesc: "Turkuaz renkli denizi ve beyaz kumsallarıyla 'Akdeniz'in Gizli Cenneti' olarak anılan çift taraflı koy.",
+            tags: ["Silifke", "Koy", "Plaj", "Turkuaz", "Tekne Turu"],
+            image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+            history: "Antik çağda Aphrodisias olarak bilinen yarımada, bir zamanlar Yunan aşk tanrıçası Afrodit'e adanmış antik bir liman kentiydi. Sualtında ve karada antik sütun kalıntıları hala görülebilir.",
+            significance: "Birbirine sırtını dönmüş iki doğal hilal koydan oluşur. Dalgalardan korunan berrak sığ denizi ve çevresindeki çam ormanlarıyla Türkiye'nin en temiz deniz suyu kalitesine sahip noktalarındandır.",
+            visitorInfo: "Yeşilovacık beldesinden virajlı bir dağ yolu ile inilir. Koyda şezlong, kafe ve tekne turu imkânları bulunmaktadır."
+          },
+          {
+            id: "yapraklikoy",
+            categoryKey: "beaches",
+            category: "Plajlar & Tatil",
+            location: "Silifke / Atakent, Mersin",
+            title: "Yapraklıkoy Koyu",
+            shortDesc: "Kayalıklar arasına gizlenmiş doğal bir havuz görünümündeki turkuaz ve serin Akdeniz koyu.",
+            tags: ["Atakent", "Doğal Havuz", "Plaj", "Şnorkel"],
+            image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80",
+            history: "Kayalık falezlerin arasından çıkan tatlı soğuk yeraltı kaynak sularının Akdeniz'in tuzlu suyuyla birleştiği benzersiz bir doğal oluşumdur.",
+            significance: "Denizin rengi açık turkuazdan zümrüt yeşiline döner. Yeraltı su kaynakları sebebiyle suyu her zaman ferahlatıcı derecede serindir; rüzgarlı havalarda bile dalgasızdır.",
+            visitorInfo: "Susanoğlu'na çok yakındır. Kıyıdaki ahşap platformlardan ve kumsaldan denize girilebilir; şnorkelli dalış için idealdir."
+          },
+          {
+            id: "kizkalesi-plaji",
+            categoryKey: "beaches",
+            category: "Plajlar & Tatil",
+            location: "Erdemli, Mersin",
+            title: "Kızkalesi Halk Plajı",
+            shortDesc: "Mavi Bayraklı ince altın sarısı kumsalı ve karşısındaki tarihi ada kalesi manzarasıyla ünlü plaj.",
+            tags: ["Mavi Bayrak", "Erdemli", "Kumsal", "Sığ Deniz"],
+            image: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&w=1200&q=80",
+            history: "Antik çağlardan bu yana yerleşim gören sahil, Kilikya Krallığı ve Roma döneminde donanmaların yanaştığı doğal bir liman kumluğuydu.",
+            significance: "Mersin'in en popüler turizm merkezidir. Denizin yüz metre boyunca sığ ve kumluk olması çocuklu aileler için son derece güvenli bir yüzme deneyimi sunar.",
+            visitorInfo: "Mavi Bayraklıdır. Sahil boyunca çok sayıda otel, pansiyon, kafe ve deniz bisikleti kiralama noktası mevcuttur."
+          },
+          {
+            id: "susanoglu-plaji",
+            categoryKey: "beaches",
+            category: "Plajlar & Tatil",
+            location: "Silifke, Mersin",
+            title: "Susanoğlu (Atakent) Plajı",
+            shortDesc: "Geniş ve kilometrelerce uzanan kumsalı ile Doğu Akdeniz'in en hareketli tatil sahili.",
+            tags: ["Silifke", "Atakent", "Mavi Bayrak", "Su Sporları"],
+            image: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=80",
+            history: "Antik Corasium liman kentinin kıyısı olan bölge, geniş kumsalları sayesinde Cumhuriyet döneminden bu yana bölgenin en rağbet gören yazlık merkezlerindendir.",
+            significance: "Geniş yürüyüş yolları, engelsiz plaj düzenlemeleri ve canlı gece hayatıyla yerli ve yabancı turistlerin buluşma noktasıdır.",
+            visitorInfo: "Şezlong ve cankurtaran hizmeti sunulmaktadır. Çevresinde zengin restoran ve konaklama seçenekleri yer alır."
+          },
+
+          // TARİH & KALELER
+          {
+            id: "mamure-kalesi",
+            categoryKey: "history",
+            category: "Tarih & Kaleler",
+            location: "Anamur, Mersin",
+            title: "Mamure Kalesi",
+            shortDesc: "Akdeniz kıyısında dimdik ayakta duran, 39 kulesiyle Türkiye'nin en büyük ve en görkemli ortaçağ kalelerinden biri.",
+            tags: ["Anamur", "Ortaçağ", "Karamanoğulları", "Kale"],
+            image: "https://images.unsplash.com/photo-1585543805890-6051f7829f98?auto=format&fit=crop&w=1200&q=80",
+            history: "Romalılar tarafından 3. veya 4. yüzyılda inşa edilen kaleye, Haçlılar, Selçuklular ve Karamanoğulları döneminde büyük eklemeler yapılmıştır. Karamanoğlu İbrahim Bey kaleyi imar ettiği için 'Mamure' (bayındır) adını almıştır.",
+            significance: "23.500 metrekarelik devasa alan üzerinde üç iç avlu, 39 kule ve bir hendek ile çevrilidir. İçerisindeki tek kubbeli tarihi cami günümüzde hala ayaktadır.",
+            visitorInfo: "Antalya-Mersin sahil karayolu üzerindedir. MüzeKart ile gezilebilir; surlardan izlenen Akdeniz manzarası büyüleyicidir."
+          },
+          {
+            id: "soli-pompeiopolis",
+            categoryKey: "history",
+            category: "Tarih & Kaleler",
+            location: "Mezitli, Mersin",
+            title: "Soli Pompeiopolis Antik Kenti",
+            shortDesc: "MÖ 700'e uzanan tarihi, görkemli korint başlıklı sütunlu caddesi ve antik limanıyla Akdeniz'in incisi.",
+            tags: ["Mezitli", "Roma", "Sütunlu Cadde", "Liman"],
+            image: "https://images.unsplash.com/photo-1599837565318-67429bde7162?auto=format&fit=crop&w=1200&q=80",
+            history: "Rodoslu kolonistler tarafından 'Soli' adıyla kurulmuş, Roma generali Pompeius tarafından korsanlardan temizlenerek 'Pompeiopolis' adıyla yeniden imar edilmiştir.",
+            significance: "200 sütunlu antik tören yolundan günümüze kadar ayakta kalabilen korint başlıklı sütunlar ve mendirek kalıntıları Doğu Akdeniz ticaretinin büyüklüğünü kanıtlar.",
+            visitorInfo: "Mezitli sahilinde yer alır. Kazı çalışmaları sürmektedir; çevresi arkeopark olarak düzenlenmiştir."
+          },
+          {
+            id: "uzuncaburc",
+            categoryKey: "history",
+            category: "Tarih & Kaleler",
+            location: "Silifke, Mersin",
+            title: "Uzuncaburç (Diokaesareia)",
+            shortDesc: "Toros Dağları'nın zirvesinde yükselen Zeus Olbios Tapınağı, anıtsal kapısı ve 5 katlı Helenistik kulesi.",
+            tags: ["Silifke", "Helenistik", "Zeus Tapınağı", "Toroslar"],
+            image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&q=80",
+            history: "Helenistik dönemde Olba Krallığı'nın dini ibadet merkeziydi. Roma döneminde MS 72 yılında imparator Vespasianus kente özerklik vermiş ve adı 'Diokaesareia' (Tanrı Sezar Kenti) olarak değiştirilmiştir.",
+            significance: "Anadolu'da korint düzeninde inşa edilmiş en eski tapınaklardan olan Zeus Olbios Tapınağı (MÖ 3. yy) ve kente adını veren 22 metre yüksekliğindeki 5 katlı gözetleme kulesiyle olağanüstü bir arkeolojik alandır.",
+            visitorInfo: "Silifke'ye 30 km mesafede yaylada yer alır. Yazın sıcak havalardan kaçıp serin bir dağ havasında antik kent gezmek için idealdir."
+          },
+
+          // DOĞAL GÜZELLİKLER
+          {
+            id: "cennet-cehennem",
+            categoryKey: "nature",
+            category: "Doğal Güzellikler",
+            location: "Silifke, Mersin",
+            title: "Cennet ve Cehennem Obrukları",
+            shortDesc: "Yeraltı sularının kireçtaşı tabakasını eritmesiyle çöken devasa doğa harikası karstik çöküntüler.",
+            tags: ["Silifke", "Jeoloji", "Kanyon", "Mitoloji"],
+            image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
+            history: "Miyosen döneminde kireçtaşlarının yeraltı nehri tarafından eritilmesi ve tavanın aniden çökmesi sonucu meydana gelen obruklardır. Cennet obruğu 70 metre derinliğinde ve tabanına 452 basamakla inilir. Cehennem obruğu ise 128 metre derinliğindedir.",
+            significance: "Yunan mitolojisinde Zeus'un yüz başlı ejderha Typhon'u yendiği yer olarak anılır. Cennet obruğunun tabanında 5. yüzyıldan kalma Meryem Ana Kilisesi ve gizemli bir yeraltı akarsuyu yer alır.",
+            visitorInfo: "Cam teras ve asansör imkânı bulunmaktadır. Yanındaki Astım Mağarası da mutlaka görülmelidir."
+          },
+          {
+            id: "aynaligol",
+            categoryKey: "nature",
+            category: "Doğal Güzellikler",
+            location: "Aydıncık, Mersin",
+            title: "Aynalıgöl (Gilindire) Mağarası",
+            shortDesc: "Buzul Çağı sonuna ait devasa damlataşları ve mağara sonunda yer alan ayna gibi berrak yeraltı gölü.",
+            tags: ["Aydıncık", "Mağara", "Buzul Çağı", "Göl"],
+            image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
+            history: "1999 yılında bir çoban tarafından keşfedilen mağara, son buzul çağı geçiş döneminde deniz seviyesinin yükselmesiyle su altında kalan hidrolojik oluşumlara ev sahipliği yapar.",
+            significance: "555 metre yatay uzunluğa sahiptir. Mağaranın sonunda yer alan gölün suyu tamamen durgun ve cam gibi berrak olduğundan 'Aynalıgöl' adını almıştır; derinliği 47 metredir.",
+            visitorInfo: "Yürüyüş merdivenleri ve profesyonel aydınlatma mevcuttur. Mağara içerisindeki hava sıcaklığı yıl boyu sabittir."
+          },
+          {
+            id: "yerkopru-selalesi",
+            categoryKey: "nature",
+            category: "Doğal Güzellikler",
+            location: "Mut, Mersin",
+            title: "Yerköprü Şelalesi",
+            shortDesc: "Göksu Nehri vadisinde doğal bir tüf tüneli üzerinden dökülen 30 metre yüksekliğindeki tabiat harikası.",
+            tags: ["Mut", "Şelale", "Göksu", "Tabiat Anıtı"],
+            image: "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80",
+            history: "Doğa Koruma ve Milli Parklar tarafından 'Tabiat Anıtı' ilan edilen şelale, Ermenek Çayı üzerindeki traverten köprüsünün altından ve üstünden akan suların binlerce yılda şekillendirdiği jeolojik bir yapıdır.",
+            significance: "Şelalenin arkasında kireçtaşı sarkıtlarıyla kaplı 200 metre uzunluğunda doğal bir mağara tüneli bulunur. Turkuaz göletleri ve bakir kanyon doğasıyla nefes kesicidir.",
+            visitorInfo: "Mut ilçe merkezine 35 km mesafededir. Şelaleye inen tahta kanyon yürüyüş parkuru yaklaşık 1.5 km sürer."
+          },
+          {
+            id: "kayaci-vadisi",
+            categoryKey: "nature",
+            category: "Doğal Güzellikler",
+            location: "Erdemli, Mersin",
+            title: "Kayacı Vadisi (Limonlu Çayı)",
+            shortDesc: "Serin suların aktığı sarp kanyonu, çınar ağaçları ve ahşap çardaklarıyla ünlü doğa kaçamağı.",
+            tags: ["Erdemli", "Kanyon", "Alabalık", "Yürüyüş"],
+            image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80",
+            history: "Limonlu Çayı'nın binlerce yıl boyunca kalkerli kayaları aşındırmasıyla oluşan derin vadi, antik çağlarda da dağlık Kilikya'dan sahile geçiş yolu olarak kullanılmıştır.",
+            significance: "Toroslar'dan doğup Akdeniz'e dökülen tertemiz çay üzerinde kurulmuş su içi sedirleri ve trekking rotalarıyla doğaseverlerin vazgeçilmezidir.",
+            visitorInfo: "Erdemli'ye 14 km uzaklıktadır. Nehir kenarındaki alabalık tesislerinde dinlenilebilir veya kanyon boyunca doğa yürüyüşü yapılabilir."
+          },
+
+          // ÜNİVERSİTELER
+          {
+            id: "mersin-universitesi",
+            categoryKey: "education",
+            category: "Üniversiteler",
+            location: "Yenişehir, Mersin",
+            title: "Mersin Üniversitesi (MEÜ)",
+            shortDesc: "1992'de kurulan, devasa Çiftlikköy Kampüsü, tıp fakültesi ve denizcilik araştırmalarıyla bölgenin bilim üssü.",
+            tags: ["Çiftlikköy", "Devlet Üniversitesi", "Tıp", "Denizcilik", "Kampüs"],
+            image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80",
+            history: "3 Temmuz 1992 tarihinde kurulan Mersin Üniversitesi, Akdeniz Bölgesi'nin en köklü yükseköğretim kurumlarından biri haline gelmiştir.",
+            significance: "16 fakültesi, modern Araştırma Hastanesi, Denizcilik Fakültesi, Devlet Konservatuvarı ve Teknopark'ı ile Türkiye'nin önde gelen bilim, araştırma ve kültür merkezlerindendir.",
+            visitorInfo: "Çiftlikköy Ana Kampüsü geniş botanik alanları, spor kompleksleri ve amfileriyle tam teşekküllü modern bir üniversite yaşamı sunar."
+          },
+          {
+            id: "tarsus-universitesi",
+            categoryKey: "education",
+            category: "Üniversiteler",
+            location: "Tarsus, Mersin",
+            title: "Tarsus Üniversitesi",
+            shortDesc: "2018 yılında kurulan, mühendislik, havacılık ve teknoloji alanlarında hızla yükselen dinamik devlet üniversitesi.",
+            tags: ["Tarsus", "Teknoloji", "Mühendislik", "Havacılık"],
+            image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
+            history: "2018 yılında bağımsız bir devlet üniversitesi olarak kurulan kurum, Tarsus'un antik eğitim ve felsefe kenti olma mirasını modern akademiye taşımaktadır.",
+            significance: "Havacılık ve Uzay Bilimleri, Mühendislik ve Uygulamalı Bilimler alanındaki yatırımlarıyla bölge sanayisiyle güçlü iş birlikleri yürütmektedir.",
+            visitorInfo: "Tarsus merkez yerleşkesinde yer alır, Adana ve Mersin'den tren ve otoyol ile kolay erişim imkânı sunar."
+          },
+          {
+            id: "toros-universitesi",
+            categoryKey: "education",
+            category: "Üniversiteler",
+            location: "Yenişehir, Mersin",
+            title: "Toros Üniversitesi",
+            shortDesc: "Mersin'in ilk vakıf üniversitesi; uluslararası vizyonu ve modern şehir kampüsleriyle yükseköğretimin öncüsü.",
+            tags: ["Vakıf Üniversitesi", "Yenişehir", "İktisat", "Güzel Sanatlar"],
+            image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80",
+            history: "Mersin Eğitim Vakfı (MEV) tarafından 2009 yılında kurulan üniversite, kentin özel sektör ve küresel bağlantılarını desteklemeyi hedefler.",
+            significance: "İktisadi ve İdari Bilimler, Güzel Sanatlar ve Sağlık Bilimleri fakülteleriyle Mersin şehir merkezinde pratik ve yenilikçi eğitim modelleri uygular.",
+            visitorInfo: "45 Evler ve Bahçelievler kampüsleri şehir merkezinde yer alıp kültürel etkinliklere ev sahipliği yapmaktadır."
+          },
+
+          // GASTRONOMİ
+          {
+            id: "tantuni",
+            categoryKey: "gastronomy",
+            category: "Gastronomi",
+            location: "Mersin Genel",
+            title: "Mersin Tantunisi (Biftek & Et)",
+            shortDesc: "Özel çukur saç tavada pamuk yağı ve toz biberle kavrulan tescilli efsanevi sokak lezzeti.",
+            tags: ["Tescilli", "Tantuni", "Sokak Lezzeti", "Akdeniz"],
+            image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=80",
+            history: "Çukurova pamuk tarlalarında çalışan emekçilerin pratik beslenme ihtiyacından doğmuş, ustaların saç tava hüneriyle tescilli bir gastronomi markasına dönüşmüştür.",
+            significance: "Yağsız dana biftek etinin haşlanıp sacda su serpiştirilerek buharla çevrilmesi, sumaklı ince kıyılmış soğan ve maydanozla açık lavaşa sarılmasıyla servis edilir.",
+            visitorInfo: "Mersin sahil şeridi ve çarşılarında günün her saati sıcak olarak sunulur. Yanında acı biber turşusu ve şalgam suyu vazgeçilmezdir."
+          },
+          {
+            id: "kerebic",
+            categoryKey: "gastronomy",
+            category: "Gastronomi",
+            location: "Mersin & Tarsus",
+            title: "Kerebiç ve Çöven Otu Köpüğü",
+            shortDesc: "İrmik helvası hamurundan ceviz veya fıstık dolgulu yapılan, kar beyazı çöven otu köpüğüyle sunulan eşsiz tatlı.",
+            tags: ["Tatlı", "Kerebiç", "Çöven Otu", "Geleneksel"],
+            image: "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=1200&q=80",
+            history: "Kökeni çok eski Levanten ve Arap mutfağına dayanan, Ramazan aylarının vazgeçilmezi olarak başlayıp Mersin'in simge tatlısı haline gelen bir lezzettir.",
+            significance: "Üzerine dökülen beyaz köpük süt veya yumurta akı değil; saatlerce kaynatılıp çırpılan şifalı dağ bitkisi çöven otunun kökünden elde edilen tamamen doğal bitkisel köpüktür.",
+            visitorInfo: "Mersin'deki tarihi tatlıcılarda porsiyon veya paket olarak satılır; üzeri bolca tarçın serpilerek tüketilir."
+          },
+          {
+            id: "cezerye",
+            categoryKey: "gastronomy",
+            category: "Gastronomi",
+            location: "Mersin Genel",
+            title: "Mersin Cezeryesi",
+            shortDesc: "Taze sarı havuçların ceviz, fındık veya Antep fıstığıyla karamelize edilmesiyle üretilen enerji deposu.",
+            tags: ["Cezerye", "Havuç", "İpek Yolu", "Fıstık"],
+            image: "https://images.unsplash.com/photo-1599785209707-a456fc1337bb?auto=format&fit=crop&w=1200&q=80",
+            history: "Adını Arapça havuç demek olan 'Cezr' kelimesinden alan, İpek Yolu tüccarlarının dayanıklı besin arayışıyla geliştirilmiş kadim bir Akdeniz lokumudur.",
+            significance: "Katkısız havuç püresinin karanfil, tarçın ve zerdeçal gibi baharatlarla ağır ateşte kaynatılması ve dışının Hindistan ceviziyle kaplanmasıyla hazırlanır.",
+            visitorInfo: "Mersin'den dönerken alınabilecek en meşhur hediyelik yiyecektir; taze yapılmış olanları lokum kıvamında yumuşacıktır."
+          },
+          {
+            id: "tarsus-humusu",
+            categoryKey: "gastronomy",
+            category: "Gastronomi",
+            location: "Tarsus, Mersin",
+            title: "Sıcak Tarsus Humusu (Tereyağlı & Pastırmalı)",
+            shortDesc: "Nohut ve tahinin sıcak fırınlanıp üzerine köpürtülmüş tereyağı dökülerek servis edildiği ana yemek lezzeti.",
+            tags: ["Tarsus", "Humus", "Tereyağlı", "Meze"],
+            image: "https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=1200&q=80",
+            history: "Orta Doğu'da soğuk meze olarak tüketilen humusu, Tarsus ustaları sıcak tereyağı ve baharatlarla harmanlayarak sıcak bir ana yemeğe dönüştürmüştür.",
+            significance: "Özel tokmaklarla pürüzsüz ezilen koçbaşı nohut, kaliteli susam tahini, sarımsak ve kimyon ile karıştırılır; güveçte ısıtılıp cızırdayan tereyağı ve pastırma ile taçlandırılır.",
+            visitorInfo: "Tarsus Tarihi Çarşısı'ndaki sadece humus yapan tarihi dükkanlarda sıcak tırnak pidesi ve turşu eşliğinde yenmelidir."
+          },
+          {
+            id: "batirik-sikma",
+            categoryKey: "gastronomy",
+            category: "Gastronomi",
+            location: "Toroslar & Silifke",
+            title: "Mersin Sıkması & Batırık",
+            shortDesc: "Yörük kültürünün sıcacık saç böreği Sıkma ve kavrulmuş susamlı, fıstıklı ferahlatıcı soğuk çorba Batırık.",
+            tags: ["Yörük Kültürü", "Sıkma", "Batırık", "Çökelek"],
+            image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=1200&q=80",
+            history: "Toros Dağları'nda yaşayan Yörüklerin göçebe yaşamında pratikçe pişirdiği mayasız bazlama sıkması ve yaz sıcaklarında serinleten besleyici fıstıklı batırığıdır.",
+            significance: "Sıkma, tereyağlı sıcak bazlamanın içine kavrulmuş soğanlı çökelek veya patates konularak sıkılmasıyla yapılır. Batırık ise ince bulgur, yer fıstığı, tahin ve asma yapraklarıyla buz gibi sunulur.",
+            visitorInfo: "Toros yayla yollarında, Silifke köylerinde ve sahil boyu kahvaltı mekanlarında taze olarak hazırlanır."
+          }
+        ]
+      },
+      en: {
+        metaTitle: "Digital Mersin | Mediterranean Portal of History, Culture & Vacation",
+        searchPlaceholder: "Search Mersin... (e.g. Mugdat, Tisan Beach, Tantuni, St. Paul)",
+        resultsText: "Results found: ",
+        noResultsTitle: "No results found",
+        noResultsDesc: "Try adjusting your search terms or active category filter.",
+        detail: {
+          backBtn: "Back to List",
+          historyTitle: "History & Foundation",
+          significanceTitle: "Cultural, Architectural & Natural Significance",
+          visitorTitle: "Visiting & Practical Info",
+          readMore: "Explore & Details"
+        },
+        nav: {
+          all: "All",
+          faith: "Mosques & Churches",
+          beaches: "Beaches & Resorts",
+          history: "History & Castles",
+          nature: "Natural Wonders",
+          education: "Universities",
+          gastronomy: "Gastronomy"
+        },
+        hero: {
+          tag: "Pearl of Cilicia",
+          title: "Where History, Nature, and the Mediterranean Meet",
+          subtitle: "Explore Mersin's millennia-old heritage, pristine beaches, sacred mosques, churches, and gourmet cuisine digitally."
+        },
+        sections: { title: "Mersin Guide & Exploration Spots" },
+        footer: { text: "© 2026 Digital Mersin Portal. All rights reserved." },
+        items: [
+          {
+            id: "mugdat-camii",
+            categoryKey: "faith",
+            category: "Mosques & Churches",
+            location: "Yenişehir, Mersin",
+            title: "Hazrat Mikdat (Mugdat) Mosque",
+            shortDesc: "One of the rare 6-minaret monumental mosques in Turkey, reflecting classical Ottoman imperial architecture.",
+            tags: ["Yenişehir", "Mosque", "Ottoman Architecture", "6 Minarets"],
+            image: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80",
+            history: "Constructed between 1988 and 1998 in honor of Mikdat ibn Aswad, a revered companion of Prophet Muhammad. It was the first 6-minaret mosque built in Turkey after Istanbul's Blue Mosque.",
+            significance: "Accommodates 5,500 worshippers indoors. It functions as a comprehensive modern complex incorporating a library, soup kitchen, conference auditorium, and healthcare center.",
+            visitorInfo: "Situated right near the coastal promenade. Open to visitors outside prayer times."
+          },
+          {
+            id: "tarsus-ulu-camii",
+            categoryKey: "faith",
+            category: "Mosques & Churches",
+            location: "Tarsus, Mersin",
+            title: "Grand Mosque of Tarsus (Ulu Camii)",
+            shortDesc: "An ancient Seljuk-Mamluk sanctuary enshrining the sacred tombs of Prophet Seth and physician Lokman.",
+            tags: ["Tarsus", "Seljuk", "Tomb", "Historic Mosque"],
+            image: "https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1200&q=80",
+            history: "Built in 1579 by Piri Mehmet Pasha of the Ramazanid Principality over the remnants of an earlier Roman-Byzantine cathedral.",
+            significance: "Houses the venerated mausoleums of Prophet Seth (son of Adam) and Lokman the Wise. Famous for black-and-white marble inlays and its arcaded inner court.",
+            visitorInfo: "Located within Tarsus Historic Center, adjoining the historic Kirkkasik Covered Bazaar."
+          },
+          {
+            id: "latin-katolik-kilisesi",
+            categoryKey: "faith",
+            category: "Mosques & Churches",
+            location: "Akdeniz, Mersin",
+            title: "Mersin Latin Italian Catholic Cathedral",
+            shortDesc: "Historic 19th-century cathedral standing as a testament to Mersin's cosmopolitan Levantine heritage.",
+            tags: ["Akdeniz", "Catholic", "Cathedral", "Levantine"],
+            image: "https://images.unsplash.com/photo-1548625361-19597793c7d6?auto=format&fit=crop&w=1200&q=80",
+            history: "Initiated in 1853 with the imperial edict of Ottoman Sultan Abdulmejid by Capuchin friars, reaching completion with its bell tower in 1898.",
+            significance: "Serves as the spiritual heart of the Christian Roman Catholic community, featuring neoclassical stonework, antique bells, and stained-glass artistry.",
+            visitorInfo: "Located in the central Çamlıbel quarter near Atatürk Park. Open for Sunday liturgies and respectful travelers."
+          },
+          {
+            id: "aya-tekla",
+            categoryKey: "faith",
+            category: "Mosques & Churches",
+            location: "Silifke, Mersin",
+            title: "Saint Thecla Cave Church (Aya Tekla)",
+            shortDesc: "The underground sanctuary where Saint Thecla, disciple of Apostle Paul, sought refuge in early Christianity.",
+            tags: ["Silifke", "Early Christian", "St Thecla", "Pilgrimage"],
+            image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
+            history: "Converted by St. Paul's teachings, Saint Thecla fled Roman pagan persecutions to this hidden cave in Silifke, where she preached and healed the sick.",
+            significance: "Became one of the earliest and most venerated pilgrimage hubs in the Christian world following the Edict of Milan in the 4th century.",
+            visitorInfo: "4 km outside Silifke. Stone stairs descend into the subterranean sanctuary; Byzantine basilica ruins stand above."
+          },
+          {
+            id: "ashab-i-kehf",
+            categoryKey: "faith",
+            category: "Mosques & Churches",
+            location: "Tarsus, Mersin",
+            title: "Cave of the Seven Sleepers (Ashab-i Kehf)",
+            shortDesc: "The sacred cave where the Seven Sleepers slept for 309 years, celebrated in both the Quran and Bible.",
+            tags: ["Tarsus", "Seven Sleepers", "Sacred Cave", "Pilgrimage"],
+            image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1200&q=80",
+            history: "Young believers escaped persecution under Emperor Decius to seek shelter in this mountain cave. In 1873, Ottoman Sultan Abdulaziz erected the ornate mosque overhead.",
+            significance: "A cross-cultural bridge of faith shared across Christian and Islamic theology, evoking deep spiritual contemplation.",
+            visitorInfo: "Located in Dedeler hill, 12 km north of Tarsus. Easy bus and car parking access."
+          },
+          {
+            id: "tisan-koyu",
+            categoryKey: "beaches",
+            category: "Beaches & Resorts",
+            location: "Silifke, Mersin",
+            title: "Tisan Peninsula & Bays",
+            shortDesc: "The 'Hidden Paradise of the Mediterranean' featuring crystal turquoise water on back-to-back twin bays.",
+            tags: ["Silifke", "Peninsula", "Turquoise", "Snorkeling"],
+            image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+            history: "Known as ancient Aphrodisias in Cilicia, it was an ancient harbor town once dedicated to Aphrodite, goddess of beauty.",
+            significance: "Protected from maritime swells by rocky headlands, offering unparalleled water purity, white sands, and submerged ancient columns.",
+            visitorInfo: "Reached via a picturesque winding mountain route from Yeşilovacık. Cafes, sunbed rentals, and boat tours available."
+          },
+          {
+            id: "yapraklikoy",
+            categoryKey: "beaches",
+            category: "Beaches & Resorts",
+            location: "Silifke / Atakent, Mersin",
+            title: "Yapraklıkoy Natural Lagoon",
+            shortDesc: "A natural sea basin hemmed in by limestone rocks, famed for turquoise cold-spring sea waters.",
+            tags: ["Atakent", "Natural Pool", "Cove", "Swimming"],
+            image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80",
+            history: "Formed where chilled fresh subterranean aquifers emerge from seabed limestone into the Mediterranean.",
+            significance: "Its protected waters remain calm even during windy days, blending refreshing cold springs with Mediterranean saline warmth.",
+            visitorInfo: "Wooden sunbathing decks hug the perimeter. Highly recommended for snorkeling and relaxation."
+          },
+          {
+            id: "kizkalesi-plaji",
+            categoryKey: "beaches",
+            category: "Beaches & Resorts",
+            location: "Erdemli, Mersin",
+            title: "Kızkalesi Blue Flag Beach",
+            shortDesc: "Golden sands stretching along the coast facing the offshore 12th-century sea fortress.",
+            tags: ["Blue Flag", "Erdemli", "Sandy Beach", "Shallow Waters"],
+            image: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&w=1200&q=80",
+            history: "A prime naval harbor in antiquity, transformed into a premier resort shoreline with postcard-perfect fortress vistas.",
+            significance: "Awarded the Blue Flag for sand and water quality; the seabed stays shallow for over 100 meters, making it ideal for families.",
+            visitorInfo: "Full facilities including umbrella rentals, waterfront restaurants, and water pedal boats to cross over to the castle."
+          },
+          {
+            id: "susanoglu-plaji",
+            categoryKey: "beaches",
+            category: "Beaches & Resorts",
+            location: "Silifke, Mersin",
+            title: "Susanoğlu (Atakent) Beach",
+            shortDesc: "A wide, sprawling coastline with vibrant beach clubs and extensive golden sandy shores.",
+            tags: ["Silifke", "Atakent", "Blue Flag", "Watersports"],
+            image: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=80",
+            history: "Originating as the coastal port of Corasium, it has blossomed into Eastern Mediterranean's liveliest summer resort.",
+            significance: "Features accessible boardwalks, certified lifeguards, water sports, and bustling seaside promenades.",
+            visitorInfo: "Abundant hotels, holiday apartments, and fresh seafood restaurants border the boulevard."
+          },
+          {
+            id: "mamure-kalesi",
+            categoryKey: "history",
+            category: "History & Castles",
+            location: "Anamur, Mersin",
+            title: "Mamure Castle",
+            shortDesc: "One of the grandest coastal medieval fortresses in Turkey, guarded by 39 crenellated stone towers.",
+            tags: ["Anamur", "Medieval", "Fortress", "Castle"],
+            image: "https://images.unsplash.com/photo-1585543805890-6051f7829f98?auto=format&fit=crop&w=1200&q=80",
+            history: "Initially founded by Romans in the 3rd century, extensively reinforced by Seljuks and Karamanids to thwart maritime invaders.",
+            significance: "Spans 23,500 square meters featuring outer moats, three courtyards, 39 towers, and a functioning 14th-century domed mosque.",
+            visitorInfo: "Positioned directly on the coastal highway between Mersin and Antalya. Museum Pass valid."
+          },
+          {
+            id: "soli-pompeiopolis",
+            categoryKey: "history",
+            category: "History & Castles",
+            location: "Mezitli, Mersin",
+            title: "Soli Pompeiopolis Ancient City",
+            shortDesc: "Monolithic Corinthian colonnades marking the ancient Roman port boulevard founded in 700 BC.",
+            tags: ["Mezitli", "Roman", "Colonnade", "Archaeology"],
+            image: "https://images.unsplash.com/photo-1599837565318-67429bde7162?auto=format&fit=crop&w=1200&q=80",
+            history: "Settled by Rhodian Greek sailors as Soli, later revived in 67 BC by Roman General Pompey after eradicating Mediterranean piracy.",
+            significance: "Original boulevard boasted 200 sculpted Corinthian pillars leading directly to an imperial harbor basin.",
+            visitorInfo: "Located within the seaside suburb of Mezitli. Open-air archaeological park with informational signboards."
+          },
+          {
+            id: "uzuncaburc",
+            categoryKey: "history",
+            category: "History & Castles",
+            location: "Silifke, Mersin",
+            title: "Uzuncaburç (Diocaesarea)",
+            shortDesc: "Majestic Zeus Olbios Temple and a 5-story Hellenistic watchtower perched in the high Taurus mountains.",
+            tags: ["Silifke", "Hellenistic", "Zeus Temple", "Highlands"],
+            image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&q=80",
+            history: "Served as the sacred spiritual metropolis of the Olba Kingdom before Emperor Vespasian granted autonomy in 72 AD.",
+            significance: "One of the earliest peripteral Corinthian temples in Anatolia (3rd century BC) with a 22-meter monumental defensive tower.",
+            visitorInfo: "Located 30 km up into the mountains from Silifke. Excellent cool summer excursion destination."
+          },
+          {
+            id: "cennet-cehennem",
+            categoryKey: "nature",
+            category: "Natural Wonders",
+            location: "Silifke, Mersin",
+            title: "Cennet & Cehennem Sinkholes",
+            shortDesc: "Vast karst chasms created by collapsed underground caves, intertwined with ancient mythology.",
+            tags: ["Silifke", "Geology", "Chasm", "Mythology"],
+            image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
+            history: "Formed in the Miocene era when an underground torrent eroded limestone strata until massive ceilings caved in.",
+            significance: "Mythological site where Zeus vanquished the monstrous dragon Typhon. Hosts a 5th-century Byzantine Virgin Mary chapel in its abyss.",
+            visitorInfo: "Equipped with panoramic glass observation platforms and elevator options."
+          },
+          {
+            id: "aynaligol",
+            categoryKey: "nature",
+            category: "Natural Wonders",
+            location: "Aydıncık, Mersin",
+            title: "Gilindire (Mirror Lake) Cave",
+            shortDesc: "Ice Age stalactites and stalagmites overlooking a mirror-smooth subterranean lake.",
+            tags: ["Aydincik", "Cave", "Ice Age", "Subterranean Lake"],
+            image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
+            history: "Discovered accidentally by a shepherd in 1999, preserving geological evidence from the last glacial transition.",
+            significance: "Measures 555 meters long. The still subterranean lake plunges 47 meters in crystal-clear waters.",
+            visitorInfo: "Fitted with illuminated staircases and handrails. Year-round stable interior temperature."
+          },
+          {
+            id: "yerkopru-selalesi",
+            categoryKey: "nature",
+            category: "Natural Wonders",
+            location: "Mut, Mersin",
+            title: "Yerköprü Waterfall",
+            shortDesc: "A 30-meter high turquoise waterfall tumbling from a lush natural travertine bridge.",
+            tags: ["Mut", "Waterfall", "Canyon", "Natural Monument"],
+            image: "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80",
+            history: "Registered as a Natural Monument, carved across millennia by spring waters rich in carbonate on the Göksu river tributary.",
+            significance: "A 200-meter cavern laced with stalactites lies behind the tumbling cascade, framed by deep turquoise pools.",
+            visitorInfo: "35 km from Mut. Reached via a wooden 1.5 km scenic walkway."
+          },
+          {
+            id: "kayaci-vadisi",
+            categoryKey: "nature",
+            category: "Natural Wonders",
+            location: "Erdemli, Mersin",
+            title: "Kayacı Valley (Limonlu Creek)",
+            shortDesc: "A cool canyon retreat shaded by plane trees and pristine fresh mountain waters.",
+            tags: ["Erdemli", "Canyon", "Trout", "Hiking"],
+            image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80",
+            history: "Carved over epochs by Limonlu Creek, serving historically as the gateway between Taurus mountains and the Mediterranean.",
+            significance: "Famous for wooden seating pergolas installed directly inside the cool shallow creek water and scenic trekking paths.",
+            visitorInfo: "14 km north of Erdemli. Delightful fish restaurants and picnic grounds."
+          },
+          {
+            id: "mersin-universitesi",
+            categoryKey: "education",
+            category: "Universities",
+            location: "Yenişehir, Mersin",
+            title: "Mersin University (MEÜ)",
+            shortDesc: "Established in 1992, the region's scientific hub featuring the expansive Çiftlikköy campus.",
+            tags: ["Public University", "Medicine", "Maritime", "Campus"],
+            image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80",
+            history: "Founded on July 3, 1992, rapidly expanding to become one of the premier higher education establishments in southern Turkey.",
+            significance: "Encompasses 16 faculties, a university hospital, maritime studies, fine arts conservatory, and Technopark.",
+            visitorInfo: "The Çiftlikköy main campus boasts rich botanical arboretums and open-air amphitheatres."
+          },
+          {
+            id: "tarsus-universitesi",
+            categoryKey: "education",
+            category: "Universities",
+            location: "Tarsus, Mersin",
+            title: "Tarsus University",
+            shortDesc: "A forward-looking public institution excelling in aerospace, engineering, and technology.",
+            tags: ["Tarsus", "Technology", "Engineering", "Aerospace"],
+            image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
+            history: "Founded as an autonomous university in 2018, continuing Tarsus's ancient legacy as a Greco-Roman philosophical center.",
+            significance: "Focuses on applied technologies, robotics, and aviation sciences with tight links to Mediterranean industry.",
+            visitorInfo: "Centrally positioned in Tarsus with convenient train access from Mersin and Adana."
+          },
+          {
+            id: "toros-universitesi",
+            categoryKey: "education",
+            category: "Universities",
+            location: "Yenişehir, Mersin",
+            title: "Toros University",
+            shortDesc: "Mersin's first private foundation university offering international academic excellence.",
+            tags: ["Foundation University", "Economics", "Fine Arts", "Modern"],
+            image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80",
+            history: "Established in 2009 by the Mersin Education Foundation to empower private-sector and global partnerships.",
+            significance: "Specializes in economics, health sciences, and fine arts through urban campus hubs.",
+            visitorInfo: "Located within the city center at 45 Evler and Bahçelievler facilities."
+          },
+          {
+            id: "tantuni",
+            categoryKey: "gastronomy",
+            category: "Gastronomy",
+            location: "Mersin Wide",
+            title: "Mersin Tantuni (Beef Stir-Fry)",
+            shortDesc: "Finely diced beef seared with cotton oil on sunken iron pans, rolled in fresh lavash.",
+            tags: ["Certified", "Tantuni", "Street Food", "Iconic"],
+            image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=80",
+            history: "Born as an energizing staple for cotton field laborers in Çukurova, refined into a nationally registered delicacy.",
+            significance: "Minced beef is pre-boiled, seared in cotton oil, splashed with water to create steam, seasoned with sumac and tomatoes, and tightly wrapped.",
+            visitorInfo: "Served at all hours across Mersin. Traditionally accompanied by hot pickled peppers and turnip juice."
+          },
+          {
+            id: "kerebic",
+            categoryKey: "gastronomy",
+            category: "Gastronomy",
+            location: "Mersin & Tarsus",
+            title: "Kerebiç with Saponaria Foam",
+            shortDesc: "Semolina pastry stuffed with pistachios or walnuts, crowned with white marshmallow-like soapwort foam.",
+            tags: ["Dessert", "Kerebic", "Soapwort", "Traditional"],
+            image: "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=1200&q=80",
+            history: "An ancient Levantine confection historically prepared for Ramadan, which became Mersin's signature dessert.",
+            significance: "The fluffy white topping contains no egg or dairy; it is whipped purely from boiled wild saponaria (soapwort) roots.",
+            visitorInfo: "Available at traditional confectioneries; dusted with ground cinnamon before serving."
+          },
+          {
+            id: "cezerye",
+            categoryKey: "gastronomy",
+            category: "Gastronomy",
+            location: "Mersin Wide",
+            title: "Mersin Cezerye",
+            shortDesc: "Caramelized sweet carrot delight enriched with walnuts, pistachios, and shredded coconut.",
+            tags: ["Cezerye", "Carrot", "Silk Road", "Pistachio"],
+            image: "https://images.unsplash.com/photo-1599785209707-a456fc1337bb?auto=format&fit=crop&w=1200&q=80",
+            history: "Derived from 'jazr' (Arabic for carrot), engineered as an energy-packed confection along ancient caravan routes.",
+            significance: "Carrots are slow-cooked with spices like clove and cinnamon, packed with nuts, and rolled in coconut flakes.",
+            visitorInfo: "The most popular gourmet souvenir to take home from Mersin."
+          },
+          {
+            id: "tarsus-humusu",
+            categoryKey: "gastronomy",
+            category: "Gastronomy",
+            location: "Tarsus, Mersin",
+            title: "Baked Tarsus Hummus with Butter",
+            shortDesc: "Silky chickpea puree oven-baked hot and drenched in sizzling brown butter and pastrami.",
+            tags: ["Tarsus", "Hot Hummus", "Butter", "Gourmet"],
+            image: "https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=1200&q=80",
+            history: "While traditionally a cold Middle Eastern dip, Tarsus culinary masters revolutionized it into a piping hot main course.",
+            significance: "Premium chickpeas are beaten into a silken cream with tahini and cumin, then baked in earthenware with bubbling clarified butter.",
+            visitorInfo: "Enjoyed with warm pita bread and pickles in the historic alleyways of Tarsus."
+          },
+          {
+            id: "batirik-sikma",
+            categoryKey: "gastronomy",
+            category: "Gastronomy",
+            location: "Taurus & Silifke",
+            title: "Nomadic Sıkma & Batırık",
+            shortDesc: "Freshly rolled skillet flatbread wraps and a chilled roasted peanut and bulgur cold soup.",
+            tags: ["Nomadic", "Sıkma", "Batırık", "Taurus"],
+            image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=1200&q=80",
+            history: "Rooted in the nomadic Yoruk culture of the Taurus mountains, providing portable, satisfying sustenance.",
+            significance: "Sıkma wraps savory curd cheese into warm flatbreads, while Batırık offers a refreshing chilled bulgur cold soup flavored with roasted peanuts.",
+            visitorInfo: "Found in roadside bakeries and breakfast cafes along the scenic mountain routes."
+          }
+        ]
+      },
+      fr: {
+        metaTitle: "Mersin Numérique | Portail d'Histoire, de Culture et de Vacances",
+        searchPlaceholder: "Recherchez à Mersin... (ex: Mugdat, Tisan, Kerebiç, Tantuni)",
+        resultsText: "Résultats trouvés: ",
+        noResultsTitle: "Aucun résultat trouvé",
+        noResultsDesc: "Essayez de modifier vos termes de recherche ou vos filtres.",
+        detail: {
+          backBtn: "Retour à la liste",
+          historyTitle: "Histoire & Origines",
+          significanceTitle: "Importance Culturelle, Architecturale & Naturelle",
+          visitorTitle: "Informations Pratiques & Visites",
+          readMore: "Explorer & Détails"
+        },
+        nav: {
+          all: "Tous",
+          faith: "Mosquées & Églises",
+          beaches: "Plages & Séjours",
+          history: "Histoire & Châteaux",
+          nature: "Merveilles Naturelles",
+          education: "Universités",
+          gastronomy: "Gastronomie"
+        },
+        hero: {
+          tag: "Perle de la Cilicie",
+          title: "Là où l'histoire, la nature et la Méditerranée se rencontrent",
+          subtitle: "Explorez numériquement le patrimoine millénaire, les plages paradisiaques, les sanctuaires et la gastronomie de Mersin."
+        },
+        sections: { title: "Guide Culturel et Touristique de Mersin" },
+        footer: { text: "© 2026 Projet Mersin Numérique. Tous droits réservés." },
+        items: [
+          {
+            id: "mugdat-camii",
+            categoryKey: "faith",
+            category: "Mosquées & Églises",
+            location: "Yenişehir, Mersin",
+            title: "Mosquée Hazret Mikdat (Muğdat)",
+            shortDesc: "L'une des rares mosquées monumentales à 6 minarets de Turquie, inspirée du style ottoman impérial.",
+            tags: ["Yenişehir", "Mosquée", "Style Ottoman", "6 Minarets"],
+            image: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80",
+            history: "Édifiée entre 1988 et 1998 en l'honneur de Mikdat ibn Aswad, compagnon du prophète Mahomet. C'est la première mosquée à six minarets construite en Turquie après la Mosquée Bleue.",
+            significance: "D'une capacité de 5 500 fidèles, elle forme un complexe moderne doté d'une bibliothèque, d'un centre de soins et d'une salle de conférences.",
+            visitorInfo: "Située sur le front de mer de Mersin, accessible en continu."
+          },
+          {
+            id: "tarsus-ulu-camii",
+            categoryKey: "faith",
+            category: "Mosquées & Églises",
+            location: "Tarse, Mersin",
+            title: "Grande Mosquée de Tarse (Ulu Camii)",
+            shortDesc: "Édifice seldjoukide-mamelouk abritant les tombeaux du prophète Seth et du médecin légendaire Lokman.",
+            tags: ["Tarse", "Seldjoukide", "Tombeau", "Mosquée Historique"],
+            image: "https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=1200&q=80",
+            history: "Construite en 1579 par la principauté des Ramazanides sur les fondations d'une ancienne cathédrale médiévale.",
+            significance: "Renommée pour ses marbres polychromes et son cloître à arcades, elle abrite le mausolée de Seth et de Lokman.",
+            visitorInfo: "Située au cœur du quartier historique de Tarse, à côté du bazar couvert Kırkkaşık."
+          },
+          {
+            id: "latin-katolik-kilisesi",
+            categoryKey: "faith",
+            category: "Mosquées & Églises",
+            location: "Akdeniz, Mersin",
+            title: "Cathédrale Latine Catholique de Mersin",
+            shortDesc: "Édifice néoclassique du XIXe siècle témoignant de l'héritage levantin cosmopolite de la ville.",
+            tags: ["Akdeniz", "Catholique", "Cathédrale", "Levantin"],
+            image: "https://images.unsplash.com/photo-1548625361-19597793c7d6?auto=format&fit=crop&w=1200&q=80",
+            history: "Inaugurée par les pères capucins en 1853 sur décret du sultan ottoman Abdülmecid et achevée avec son campanile en 1898.",
+            significance: "Centre cultuel de la communauté chrétienne catholique de la ville, abritant de remarquables vitraux et cloches d'époque.",
+            visitorInfo: "Située dans le quartier de Çamlıbel près du parc Atatürk. Ouverte pour les offices et aux visiteurs respectueux."
+          },
+          {
+            id: "aya-tekla",
+            categoryKey: "faith",
+            category: "Mosquées & Églises",
+            location: "Silifke, Mersin",
+            title: "Sanctuaire de Sainte Thècle (Aya Tekla)",
+            shortDesc: "Grotte sacrée où s'est réfugiée sainte Thècle, disciple de saint Paul et première martyre chrétienne.",
+            tags: ["Silifke", "Paléochrétien", "Sainte Thècle", "Pèlerinage"],
+            image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
+            history: "Convertie par les sermons de saint Paul, Thècle s'est installée dans cette grotte pour échapper aux persécutions païennes.",
+            significance: "Dès le IVe siècle, ce site est devenu l'un des plus importants centres de pèlerinage du monde chrétien antique.",
+            visitorInfo: "À 4 km de Silifke. Escalier aménagé dans la crypte souterraine; vestiges de la basilique de Zénon au-dessus."
+          },
+          {
+            id: "ashab-i-kehf",
+            categoryKey: "faith",
+            category: "Mosquées & Églises",
+            location: "Tarse, Mersin",
+            title: "Grotte des Sept Dormants (Ashâb-ı Kehf)",
+            shortDesc: "Grotte vénérée où sept jeunes croyants et leur chien dormirent pendant 309 ans.",
+            tags: ["Tarse", "Sept Dormants", "Grotte Sacrée", "Pèlerinage"],
+            image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1200&q=80",
+            history: "Fuyant la tyrannie de l'empereur Dèce, les sept jeunes gens trouvèrent refuge dans cette grotte. En 1873, une mosquée y fut construite par le sultan Abdülaziz.",
+            significance: "Lieu de mémoire spirituel partagé entre le christianisme et l'islam.",
+            visitorInfo: "Située sur les hauteurs de Dedeler, à 12 km au nord de Tarse."
+          },
+          {
+            id: "tisan-koyu",
+            categoryKey: "beaches",
+            category: "Plages & Séjours",
+            location: "Silifke, Mersin",
+            title: "Péninsule et Baies de Tisan",
+            shortDesc: "Le joyau caché de la Méditerranée composé de baies jumelles aux eaux d'un turquoise immaculé.",
+            tags: ["Silifke", "Péninsule", "Turquoise", "Plongée"],
+            image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+            history: "Ancienne Aphrodisias de Cilicie dédiée au culte d'Aphrodite, abritant des vestiges antiques sur terre et sous la mer.",
+            significance: "Baignée par des eaux calmes et d'une clarté totale, entourée de pinèdes méditerranéennes.",
+            visitorInfo: "Accès par une route de montagne panoramique depuis Yeşilovacık. Excursions en bateau et plages aménagées."
+          },
+          {
+            id: "yapraklikoy",
+            categoryKey: "beaches",
+            category: "Plages & Séjours",
+            location: "Silifke / Atakent, Mersin",
+            title: "Crique de Yapraklıkoy",
+            shortDesc: "Piscine naturelle bordée de rochers calcaro-marins aux eaux turquoises et rafraîchissantes.",
+            tags: ["Atakent", "Bassin Naturel", "Crique", "Baignade"],
+            image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80",
+            history: "Formée à l'endroit où des sources souterraines d'eau douce fraîche se déversent directement dans la Méditerranée.",
+            significance: "Mer abritée du vent offrant une eau rafraîchissante et une visibilité parfaite pour le masque et tuba.",
+            visitorInfo: "Terrasses en bois sur les rochers, idéale pour une baignade paisible."
+          },
+          {
+            id: "kizkalesi-plaji",
+            categoryKey: "beaches",
+            category: "Plages & Séjours",
+            location: "Erdemli, Mersin",
+            title: "Plage Pavillon Bleu de Kızkalesi",
+            shortDesc: "Sable fin doré face à la silhouette du château insulaire du XIIe siècle.",
+            tags: ["Pavillon Bleu", "Erdemli", "Sable Fin", "Mer Peu Profonde"],
+            image: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&w=1200&q=80",
+            history: "Plage historique servant de rade navale depuis l'Antiquité, devenue la station balnéaire phare de Mersin.",
+            significance: "La mer reste peu profonde sur plus de 100 mètres, idéale pour les familles avec enfants.",
+            visitorInfo: "Location de pédalos pour rejoindre le château en mer, nombreux hôtels et restaurants sur le rivage."
+          },
+          {
+            id: "susanoglu-plaji",
+            categoryKey: "beaches",
+            category: "Plages & Séjours",
+            location: "Silifke, Mersin",
+            title: "Plage de Susanoğlu (Atakent)",
+            shortDesc: "Grande plage animée de sable blond s'étirant sur plusieurs kilomètres.",
+            tags: ["Silifke", "Atakent", "Pavillon Bleu", "Sports Nautiques"],
+            image: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=80",
+            history: "Ancien port antique de Corasium, aujourd'hui station balnéaire populaire réputée pour sa convivialité.",
+            significance: "Postes de secours certifiés, plage accessible aux personnes à mobilité réduite et loisirs nautiques.",
+            visitorInfo: "Large choix d'hébergements et de restaurants de poissons le long de l'esplanade."
+          },
+          {
+            id: "mamure-kalesi",
+            categoryKey: "history",
+            category: "Histoire & Châteaux",
+            location: "Anamur, Mersin",
+            title: "Château de Mamure",
+            shortDesc: "L'une des plus impressionnantes forteresses médiévales de Turquie avec 39 tours de défense côtières.",
+            tags: ["Anamur", "Médiéval", "Forteresse", "Château"],
+            image: "https://images.unsplash.com/photo-1585543805890-6051f7829f98?auto=format&fit=crop&w=1200&q=80",
+            history: "Fondé par les Romains puis fortifié par les Seldjoukides et les Karamanides pour contrôler la route côtière.",
+            significance: "S'étend sur 23 500 m² avec trois cours intérieures, un fossé et une mosquée historique du XIVe siècle.",
+            visitorInfo: "En bordure de la route nationale Antalya-Mersin. Carte des musées acceptée."
+          },
+          {
+            id: "soli-pompeiopolis",
+            categoryKey: "history",
+            category: "Histoire & Châteaux",
+            location: "Mezitli, Mersin",
+            title: "Cité Antique de Soli Pompeiopolis",
+            shortDesc: "Voie romaine à colonnades corinthiennes fondée en 700 av. J.-C. ouverte sur un port impérial.",
+            tags: ["Mezitli", "Rome", "Colonnades", "Archéologie"],
+            image: "https://images.unsplash.com/photo-1599837565318-67429bde7162?auto=format&fit=crop&w=1200&q=80",
+            history: "Fondée par des colons de Rhodes puis réaménagée par le général romain Pompée après avoir vaincu les pirates ciliciens.",
+            significance: "Les majestueuses colonnes sculptées témoignent de l'opulence des ports romains orientaux.",
+            visitorInfo: "Située en bordure maritime de Mezitli. Parc archéologique aménagé en plein air."
+          },
+          {
+            id: "uzuncaburc",
+            categoryKey: "history",
+            category: "Histoire & Châteaux",
+            location: "Silifke, Mersin",
+            title: "Uzuncaburç (Diocaesarea)",
+            shortDesc: "Le temple de Zeus Olbios et sa tour hellénistique de 5 étages sur les hauteurs du mont Taurus.",
+            tags: ["Silifke", "Hellénistique", "Temple de Zeus", "Taurus"],
+            image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&q=80",
+            history: "Sanctuaire de l'ancien royaume d'Olba, élevé au rang de cité libre par l'empereur Vespasien en 72 apr. J.-C.",
+            significance: "L'un des plus anciens temples corinthiens d'Anatolie (IIIe siècle av. J.-C.) dominé par sa tour de guet de 22 mètres.",
+            visitorInfo: "À 30 km au nord de Silifke. Air montagnard très agréable en été."
+          },
+          {
+            id: "cennet-cehennem",
+            categoryKey: "nature",
+            category: "Merveilles Naturelles",
+            location: "Silifke, Mersin",
+            title: "Gouffres de Cennet et Cehennem",
+            shortDesc: "Immenses effondrements karstiques abritant en leur fond la chapelle byzantine de la Vierge Marie.",
+            tags: ["Silifke", "Géologie", "Gouffre", "Mythologie"],
+            image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
+            history: "Formations issues de l'effondrement miocène des cavités calcaires creusées par un fleuve souterrain.",
+            significance: "Lieu mythologique où Zeus vainquit le monstre Typhon. Chapelle byzantine du Ve siècle au fond du Paradis.",
+            visitorInfo: "Équipé d'une terrasse panoramique en verre et d'un ascenseur moderne."
+          },
+          {
+            id: "aynaligol",
+            categoryKey: "nature",
+            category: "Merveilles Naturelles",
+            location: "Aydıncık, Mersin",
+            title: "Grotte de Gilindire (Aynalıgöl)",
+            shortDesc: "Sanctuaire géologique de l'ère glaciaire surplombant un lac souterrain limpide comme un miroir.",
+            tags: ["Aydincik", "Grotte", "Ère Glaciaire", "Lac"],
+            image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
+            history: "Découverte par un berger en 1999, témoignant de la montée des eaux méditerranéennes il y a 10 000 ans.",
+            significance: "Longue de 555 mètres avec d'immenses concrétions et un lac de 47 mètres d'une limpidité absolue.",
+            visitorInfo: "Parcours balisé avec passerelles et éclairages. Température constante toute l'année."
+          },
+          {
+            id: "yerkopru-selalesi",
+            categoryKey: "nature",
+            category: "Merveilles Naturelles",
+            location: "Mut, Mersin",
+            title: "Cascade de Yerköprü",
+            shortDesc: "Chute d'eau turquoise de 30 mètres surgissant d'un pont naturel de travertin.",
+            tags: ["Mut", "Cascade", "Göksu", "Monument Naturel"],
+            image: "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80",
+            history: "Classée Monument Naturel, forgée par les eaux de carbonate s'écoulant au-dessus du canyon de l'Ermenek.",
+            significance: "Une grotte de stalactites de 200 mètres s'ouvre derrière le rideau d'eau turquoise.",
+            visitorInfo: "À 35 km de Mut. Accès par une passerelle en bois de 1,5 km."
+          },
+          {
+            id: "kayaci-vadisi",
+            categoryKey: "nature",
+            category: "Merveilles Naturelles",
+            location: "Erdemli, Mersin",
+            title: "Vallée de Kayacı (Rivière Limonlu)",
+            shortDesc: "Canyon d'eau vive ombragé de platanes, idéal pour la randonnée et la détente.",
+            tags: ["Erdemli", "Canyon", "Truites", "Randonnée"],
+            image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80",
+            history: "Gorge taillée au fil des millénaires par la rivière Limonlu reliant le Taurus à la Méditerranée.",
+            significance: "Réputée pour ses salons traditionnels en bois installés directement les pieds dans l'eau fraîche.",
+            visitorInfo: "À 14 km au nord d'Erdemli. Restaurants de poissons et aires de pique-nique."
+          },
+          {
+            id: "mersin-universitesi",
+            categoryKey: "education",
+            category: "Universités",
+            location: "Yenişehir, Mersin",
+            title: "Université de Mersin (MEÜ)",
+            shortDesc: "Fondée en 1992, pôle scientifique majeur du sud de la Turquie avec son campus de Çiftlikköy.",
+            tags: ["Université Publique", "Médecine", "Maritime", "Campus"],
+            image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1200&q=80",
+            history: "Fondée le 3 juillet 1992, devenue l'une des plus grandes universités de la côte méditerranéenne turque.",
+            significance: "Regroupe 16 facultés, un centre hospitalier universitaire, des études maritimes et un technopôle.",
+            visitorInfo: "Le campus central de Çiftlikköy propose des jardins botaniques et un environnement universitaire dynamique."
+          },
+          {
+            id: "tarsus-universitesi",
+            categoryKey: "education",
+            category: "Universités",
+            location: "Tarse, Mersin",
+            title: "Université de Tarse",
+            shortDesc: "Université publique axée sur l'aérospatiale, les technologies et l'ingénierie.",
+            tags: ["Tarse", "Technologie", "Ingénierie", "Aérospatiale"],
+            image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
+            history: "Devenue autonome en 2018, renouant avec le passé philosophique et savant de l'antique cité de Tarse.",
+            significance: "Spécialisée dans les sciences appliquées et l'aviation en partenariat avec les industries méditerranéennes.",
+            visitorInfo: "Idéalement située à Tarse, facilement accessible en train depuis Adana et Mersin."
+          },
+          {
+            id: "toros-universitesi",
+            categoryKey: "education",
+            category: "Universités",
+            location: "Yenişehir, Mersin",
+            title: "Université Toros",
+            shortDesc: "Première université privée de Mersin favorisant l'innovation et l'excellence académique.",
+            tags: ["Fondation", "Économie", "Beaux-Arts", "Moderne"],
+            image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80",
+            history: "Créée en 2009 par la Fondation d'Éducation de Mersin afin de développer l'ouverture internationale.",
+            significance: "Formations réputées en économie, beaux-arts et sciences de la santé réparties sur des campus urbains.",
+            visitorInfo: "Campus situés en centre-ville à 45 Evler et Bahçelievler."
+          },
+          {
+            id: "tantuni",
+            categoryKey: "gastronomy",
+            category: "Gastronomie",
+            location: "Tout Mersin",
+            title: "Tantuni de Mersin",
+            shortDesc: "Émincé de bœuf sauté à l'huile de coton sur tôle concave et roulé en galette lavash.",
+            tags: ["Certifié", "Tantuni", "Street Food", "Emblématique"],
+            image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=80",
+            history: "Né des repas revigorants des cueilleurs de coton de Çukurova, devenu le plat emblématique de la région.",
+            significance: "La viande est précuite puis rissolée à la vapeur d'eau avec sumac, tomates et oignons frais.",
+            visitorInfo: "Disponible à toute heure. À accompagner d'un jus de navet fermenté (şalgam) et de piments piquants."
+          },
+          {
+            id: "kerebic",
+            categoryKey: "gastronomy",
+            category: "Gastronomie",
+            location: "Mersin & Tarse",
+            title: "Kerebiç à la Mousse de Saponaire",
+            shortDesc: "Gâteau de semoule aux pistaches surmonté d'une émulsion blanche et aérienne tirée de racines sauvages.",
+            tags: ["Dessert", "Kerebic", "Saponaire", "Traditionnel"],
+            image: "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=1200&q=80",
+            history: "Spécialité printanière d'origine levantine, emblème des fêtes et de la haute pâtisserie de Mersin.",
+            significance: "La crème blanche est exempte de produit laitier ou d'œuf; elle est battue à partir de racines de saponaire officinale.",
+            visitorInfo: "Se déguste saupoudré d'une pincée de cannelle dans les confiseries traditionnelles."
+          },
+          {
+            id: "cezerye",
+            categoryKey: "gastronomy",
+            category: "Gastronomie",
+            location: "Tout Mersin",
+            title: "Cezerye de Mersin",
+            shortDesc: "Confiserie énergétique à base de carottes caramélisées, pistaches et noix de coco râpée.",
+            tags: ["Cezerye", "Carotte", "Route de la Soie", "Pistache"],
+            image: "https://images.unsplash.com/photo-1599785209707-a456fc1337bb?auto=format&fit=crop&w=1200&q=80",
+            history: "Tirant son nom de 'cezr' (carotte en arabe), cette douceur servait d'aliment énergétique aux marchands des caravanes.",
+            significance: "Purée de carottes mijotée aux épices douces (cannelle, clou de girofle) et enrobée de copeaux de noix de coco.",
+            visitorInfo: "Le souvenir gourmand incontournable à emporter de Mersin."
+          },
+          {
+            id: "tarsus-humusu",
+            categoryKey: "gastronomy",
+            category: "Gastronomie",
+            location: "Tarse, Mersin",
+            title: "Houmous Chaud de Tarse au Beurre",
+            shortDesc: "Purée soyeuse de pois chiches passée au four et arrosée de beurre fondu crépitant.",
+            tags: ["Tarse", "Houmous Chaud", "Beurre", "Gastronomique"],
+            image: "https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=1200&q=80",
+            history: "Alors qu'il est froid au Levant, les maîtres de Tarse en ont fait un plat chaud complet et généreux.",
+            significance: "Pois chiches pilés avec tahini et cumin, gratinés en terrine et nappés de beurre noisette et pastrami.",
+            visitorInfo: "À déguster avec du pain pita chaud dans les ruelles du vieux bazar de Tarse."
+          },
+          {
+            id: "batirik-sikma",
+            categoryKey: "gastronomy",
+            category: "Gastronomie",
+            location: "Taurus & Silifke",
+            title: "Sıkma et Batırık des Nomades",
+            shortDesc: "Galette chaude roulée au fromage et soupe froide rafraîchissante aux cacahuètes pilées.",
+            tags: ["Nomade", "Sıkma", "Batırık", "Taurus"],
+            image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=1200&q=80",
+            history: "Issus de la tradition pastorale des Yörüks du Taurus pour affronter les chaleurs estivales méditerranéennes.",
+            significance: "Le Sıkma est garni de fromage de chèvre et d'oignons; le Batırık associe boulgour fin, cacahuètes et feuilles de vigne.",
+            visitorInfo: "Spécialités artisanales proposées dans les auberges campagnardes de Silifke."
+          }
+        ]
+      }
+    };
+
+    let currentLang = 'tr';
+    let currentCategory = 'all';
+    let activeDetailId = null;
+
+    // SPA Yönlendirme (Router)
+    function navigateToDetail(itemId) {
+      activeDetailId = itemId;
+      window.location.hash = `detay-${itemId}`;
+      closeDropdown();
+      renderView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function navigateToHome() {
+      activeDetailId = null;
+      window.location.hash = '';
+      closeDropdown();
+      renderView();
+    }
+
+    function checkRoute() {
+      const hash = window.location.hash;
+      if (hash && hash.startsWith('#detay-')) {
+        activeDetailId = hash.replace('#detay-', '');
+      } else {
+        activeDetailId = null;
+      }
+      renderView();
+    }
+
+    window.addEventListener('hashchange', checkRoute);
+
+    // Dil Değiştirme
+    function setLanguage(lang) {
+      if (!dataStore[lang]) return;
+      currentLang = lang;
+      localStorage.setItem('mersin_lang', lang);
+
+      document.documentElement.lang = lang;
+      document.title = dataStore[lang].metaTitle;
+      document.getElementById('search-input').placeholder = dataStore[lang].searchPlaceholder;
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const val = key.split('.').reduce((acc, part) => acc && acc[part], dataStore[lang]);
+        if (val) el.textContent = val;
+      });
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+      });
+
+      renderView();
+    }
+
+    // Kategori Filtresi
+    function filterByCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.nav-link, .filter-chip').forEach(el => {
+        el.classList.toggle('active', el.getAttribute('data-cat') === cat);
+      });
+      if (activeDetailId) {
+        navigateToHome();
+      } else {
+        renderCards();
+      }
+    }
+
+    // İlk Harften İtibaren Canlı Arama ve Dropdown
+    function handleSearchInput(e) {
+      const query = e.target.value.trim().toLowerCase();
+      const clearBtn = document.getElementById('clear-btn');
+      clearBtn.classList.toggle('show', query.length > 0);
+
+      const dropdown = document.getElementById('search-dropdown');
+
+      if (query.length === 0) {
+        closeDropdown();
+        renderCards();
+        return;
+      }
+
+      const items = dataStore[currentLang].items;
+      const matches = items.filter(item => {
+        const inTitle = item.title.toLowerCase().includes(query);
+        const inDesc = item.shortDesc.toLowerCase().includes(query);
+        const inCat = item.category.toLowerCase().includes(query);
+        const inTags = item.tags.some(t => t.toLowerCase().includes(query));
+        const inLoc = item.location.toLowerCase().includes(query);
+        return inTitle || inDesc || inCat || inTags || inLoc;
+      });
+
+      if (matches.length > 0) {
+        dropdown.innerHTML = matches.map(item => `
+          <div class="dropdown-item" onclick="navigateToDetail('${item.id}')">
+            <img src="${item.image}" class="dropdown-thumb" alt="${item.title}">
+            <div class="dropdown-info">
+              <span class="dropdown-category">${item.category} • ${item.location}</span>
+              <div class="dropdown-title">${item.title}</div>
+              <div class="dropdown-hint">${item.shortDesc.slice(0, 75)}...</div>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        dropdown.innerHTML = `
+          <div class="dropdown-no-result">
+            <strong>"${e.target.value}"</strong> için sonuç bulunamadı.
+          </div>
+        `;
+      }
+      dropdown.classList.add('open');
+      renderCards(query);
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('search-input');
+      input.value = '';
+      document.getElementById('clear-btn').classList.remove('show');
+      closeDropdown();
+      renderCards();
+      input.focus();
+    }
+
+    function closeDropdown() {
+      const dropdown = document.getElementById('search-dropdown');
+      dropdown.classList.remove('open');
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-wrapper')) {
+        closeDropdown();
+      }
+    });
+
+    // Görünüm Yönetimi
+    function renderView() {
+      const homeView = document.getElementById('home-view');
+      const detailView = document.getElementById('detail-view');
+
+      if (activeDetailId) {
+        homeView.style.display = 'none';
+        detailView.style.display = 'block';
+        renderDetailContent(activeDetailId);
+      } else {
+        homeView.style.display = 'block';
+        detailView.style.display = 'none';
+        renderCards();
+      }
+    }
+
+    // Detay Sayfası Oluşturma
+    function renderDetailContent(itemId) {
+      const store = dataStore[currentLang];
+      const item = store.items.find(i => i.id === itemId);
+      const container = document.getElementById('detail-article-container');
+
+      if (!item) {
+        navigateToHome();
+        return;
+      }
+
+      container.innerHTML = `
+        <article>
+          <div class="detail-header">
+            <span class="detail-category-badge">${item.category}</span>
+            <h1 class="detail-title">${item.title}</h1>
+            <div class="detail-location">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              ${item.location}
+            </div>
+          </div>
+
+          <img src="${item.image}" alt="${item.title}" class="detail-hero-img">
+
+          <div class="detail-content">
+            <div class="detail-section-block">
+              <h3>
+                <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                ${store.detail.historyTitle}
+              </h3>
+              <p>${item.history}</p>
+            </div>
+
+            <div class="detail-section-block">
+              <h3>
+                <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+                ${store.detail.significanceTitle}
+              </h3>
+              <p>${item.significance}</p>
+            </div>
+
+            <div class="detail-section-block">
+              <h3>
+                <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                ${store.detail.visitorTitle}
+              </h3>
+              <p>${item.visitorInfo}</p>
+            </div>
+
+            <div class="detail-tags-bar">
+              ${item.tags.map(t => `<span class="tag">#${t}</span>`).join('')}
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    // Kartlar Listesini Çizme
+    function renderCards(customQuery = null) {
+      const container = document.getElementById('cards-container');
+      const countEl = document.getElementById('result-count');
+      const store = dataStore[currentLang];
+      
+      const query = customQuery !== null ? customQuery : document.getElementById('search-input').value.trim().toLowerCase();
+
+      const filtered = store.items.filter(item => {
+        const matchesCat = (currentCategory === 'all' || item.categoryKey === currentCategory);
+        if (!matchesCat) return false;
+        if (!query) return true;
+
+        const inTitle = item.title.toLowerCase().includes(query);
+        const inDesc = item.shortDesc.toLowerCase().includes(query);
+        const inCat = item.category.toLowerCase().includes(query);
+        const inTags = item.tags.some(t => t.toLowerCase().includes(query));
+        const inLoc = item.location.toLowerCase().includes(query);
+
+        return inTitle || inDesc || inCat || inTags || inLoc;
+      });
+
+      countEl.textContent = `${store.resultsText}${filtered.length}`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 4rem 1rem; color: var(--text-muted);">
+            <h3 style="font-size: 1.35rem; color: var(--dark); margin-bottom: 0.5rem;">${store.noResultsTitle}</h3>
+            <p>${store.noResultsDesc}</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => `
+        <article class="card" onclick="navigateToDetail('${item.id}')">
+          <img src="${item.image}" alt="${item.title}" class="card-img" loading="lazy">
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="card-category">${item.category}</span>
+              <span class="card-location">${item.location}</span>
+            </div>
+            <h3 class="card-title">${item.title}</h3>
+            <p class="card-desc">${item.shortDesc}</p>
+            <div class="card-footer">
+              <div class="card-tags">
+                ${item.tags.slice(0, 2).map(tag => `<span class="tag">#${tag}</span>`).join('')}
+              </div>
+              <span class="read-more">
+                ${store.detail.readMore} &rarr;
+              </span>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // İlk Yükleme
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('mersin_lang');
+      const browserLang = navigator.language.slice(0, 2);
+      const defaultLang = savedLang || (['tr', 'en', 'fr'].includes(browserLang) ? browserLang : 'tr');
+      setLanguage(defaultLang);
+      checkRoute();
+    });
+  </script>
+</body>
+</html>
